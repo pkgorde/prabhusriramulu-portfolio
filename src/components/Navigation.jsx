@@ -1,17 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Box,
+  useScrollTrigger,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 20,
+  });
 
   const navLinks = [
     { name: 'about me', href: '#about' },
@@ -20,90 +30,116 @@ const Navigation = () => {
     { name: "let's chat", href: '#contact' },
   ];
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
+  const handleNavClick = (href) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
+      setMobileOpen(false);
     }
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
-      }`}
-    >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo / Name */}
-          <a
+    <>
+      <AppBar
+        position="fixed"
+        elevation={trigger ? 4 : 0}
+        sx={{
+          backgroundColor: trigger ? 'background.default' : 'transparent',
+          transition: 'all 0.3s',
+        }}
+      >
+        <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
+          <Typography
+            variant="h6"
+            component="a"
             href="#"
-            className="text-xl md:text-2xl font-bold text-dark hover:text-primary transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            sx={{
+              textDecoration: 'none',
+              color: 'text.primary',
+              fontWeight: 700,
+              fontSize: { xs: '1.25rem', md: '1.5rem' },
+              '&:hover': {
+                color: 'primary.main',
+              },
+              transition: 'color 0.3s',
+            }}
           >
             prabhu sriramulu
-          </a>
+          </Typography>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
             {navLinks.map((link) => (
-              <a
+              <Button
                 key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-base text-dark hover:text-primary transition-colors font-medium"
+                onClick={() => handleNavClick(link.href)}
+                sx={{
+                  color: 'text.primary',
+                  fontWeight: 600,
+                  '&:hover': {
+                    color: 'primary.main',
+                    backgroundColor: 'transparent',
+                  },
+                }}
               >
                 {link.name}
-              </a>
+              </Button>
             ))}
-          </div>
+          </Box>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-dark"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+            sx={{ display: { md: 'none' }, color: 'text.primary' }}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Toolbar /> {/* Spacer for fixed AppBar */}
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden pb-6 bg-white">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block py-3 text-base text-dark hover:text-primary transition-colors font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    </nav>
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { width: '70%', maxWidth: 300 },
+        }}
+      >
+        <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          <IconButton onClick={handleDrawerToggle}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <List>
+          {navLinks.map((link) => (
+            <ListItem key={link.name} disablePadding>
+              <ListItemButton onClick={() => handleNavClick(link.href)}>
+                <ListItemText
+                  primary={link.name}
+                  primaryTypographyProps={{
+                    fontWeight: 600,
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

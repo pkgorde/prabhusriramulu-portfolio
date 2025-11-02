@@ -1,84 +1,131 @@
+import { Box, Container, Typography, Card, CardContent, Grid, Paper, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import ImageIcon from '@mui/icons-material/Image';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import WaveDivider from '../components/WaveDivider';
 
 const WorkSection = () => {
   return (
-    <section id="work" className="section-spacing bg-cream">
-      <div className="container-custom">
+    <Box component="section" id="work" sx={{ py: { xs: 8, md: 12 }, bgcolor: 'background.paper' }}>
+      <Container maxWidth="lg">
         {/* Section Header */}
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 md:mb-20 max-w-4xl">
+        <Typography variant="h2" sx={{ mb: { xs: 8, md: 10 }, maxWidth: '900px' }}>
           Check out what I've been working on in my current role at{' '}
-          <span className="text-primary">TechCo</span>.
-        </h2>
+          <Box component="span" color="primary.main">TechCo</Box>.
+        </Typography>
 
         {/* Current Project Showcase */}
-        <div className="space-y-16 md:space-y-24">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 8, md: 12 } }}>
           {/* Main Product Card */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">
-              Product Name: Analytics Dashboard
-            </h3>
+          <Card elevation={1}>
+            <CardContent sx={{ p: { xs: 4, md: 6 } }}>
+              <Typography variant="h3" gutterBottom>
+                Product Name: Analytics Dashboard
+              </Typography>
 
-            {/* Video/Image Placeholder */}
-            <div className="bg-gray-200 rounded-lg overflow-hidden aspect-video mb-8">
-              <div className="w-full h-full flex items-center justify-center text-gray-500">
-                <div className="text-center">
-                  <svg className="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
-                  </svg>
-                  <p className="text-lg">Product Demo Video</p>
-                </div>
-              </div>
-            </div>
+              {/* Video/Image Placeholder */}
+              <Paper
+                elevation={0}
+                sx={{
+                  bgcolor: 'grey.200',
+                  height: 400,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 2,
+                  mb: 4,
+                }}
+              >
+                <Box textAlign="center" color="grey.500">
+                  <PlayCircleOutlineIcon sx={{ fontSize: 80, mb: 2 }} />
+                  <Typography variant="h6">Product Demo Video</Typography>
+                </Box>
+              </Paper>
 
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              A comprehensive analytics dashboard that helps teams make data-driven decisions.
-              Built from the ground up to handle millions of data points while maintaining
-              a smooth, intuitive user experience.
-            </p>
-          </div>
+              <Typography variant="body1" color="text.secondary">
+                A comprehensive analytics dashboard that helps teams make data-driven decisions.
+                Built from the ground up to handle millions of data points while maintaining
+                a smooth, intuitive user experience.
+              </Typography>
+            </CardContent>
+          </Card>
 
           {/* Feature Highlight */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="bg-gray-200 rounded-lg overflow-hidden aspect-[4/3]">
-              <div className="w-full h-full flex items-center justify-center text-gray-500">
-                <div className="text-center">
-                  <svg className="w-20 h-20 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-lg">Feature Screenshot</p>
-                </div>
-              </div>
-            </div>
+          <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Paper
+                elevation={0}
+                sx={{
+                  bgcolor: 'grey.200',
+                  height: 350,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 2,
+                }}
+              >
+                <Box textAlign="center" color="grey.500">
+                  <ImageIcon sx={{ fontSize: 80, mb: 2 }} />
+                  <Typography variant="h6">Feature Screenshot</Typography>
+                </Box>
+              </Paper>
+            </Grid>
 
-            <div>
-              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">
+            <Grid item xs={12} md={6}>
+              <Typography variant="h3" color="primary.main" gutterBottom>
                 Real-Time Collaboration
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
                 Enabled teams to work together seamlessly with live updates and shared dashboards.
                 This feature reduced reporting time by 60% and improved cross-functional alignment.
-              </p>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <p className="text-gray-700"><span className="font-bold">60%</span> reduction in reporting time</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <p className="text-gray-700"><span className="font-bold">10,000+</span> active users</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  <p className="text-gray-700"><span className="font-bold">95%</span> user satisfaction rate</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Typography>
+              <List disablePadding>
+                <ListItem disablePadding sx={{ mb: 1.5 }}>
+                  <ListItemIcon sx={{ minWidth: 32 }}>
+                    <FiberManualRecordIcon sx={{ fontSize: 8, color: 'primary.main' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant="body1" color="text.secondary">
+                        <Box component="span" fontWeight={700}>60%</Box> reduction in reporting time
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem disablePadding sx={{ mb: 1.5 }}>
+                  <ListItemIcon sx={{ minWidth: 32 }}>
+                    <FiberManualRecordIcon sx={{ fontSize: 8, color: 'primary.main' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant="body1" color="text.secondary">
+                        <Box component="span" fontWeight={700}>10,000+</Box> active users
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemIcon sx={{ minWidth: 32 }}>
+                    <FiberManualRecordIcon sx={{ fontSize: 8, color: 'primary.main' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography variant="body1" color="text.secondary">
+                        <Box component="span" fontWeight={700}>95%</Box> user satisfaction rate
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              </List>
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
 
-      <WaveDivider className="mt-16 md:mt-24" color="white" />
-    </section>
+      <Box sx={{ mt: { xs: 8, md: 12 } }}>
+        <WaveDivider color="white" />
+      </Box>
+    </Box>
   );
 };
 

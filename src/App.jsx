@@ -1,3 +1,5 @@
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './theme';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import HeroSection from './sections/HeroSection';
@@ -8,7 +10,8 @@ import ContactSection from './sections/ContactSection';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Navigation />
       <main>
         <HeroSection />
@@ -18,7 +21,7 @@ function App() {
         <ContactSection />
       </main>
       <Footer />
-    </div>
+    </ThemeProvider>
   );
 }
 
