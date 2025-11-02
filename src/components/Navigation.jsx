@@ -72,7 +72,7 @@ const Navigation = () => {
               transition: 'color 0.3s',
             }}
           >
-            prabhu sriramulu
+            Prabhu Sriramulu
           </Typography>
 
           {/* Desktop Navigation */}

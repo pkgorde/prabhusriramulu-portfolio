@@ -9,9 +9,8 @@ import WaveDivider from '../components/WaveDivider';
 
 const ContactSection = () => {
   const socialLinks = [
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: <LinkedInIcon /> },
-    { name: 'Twitter', url: 'https://twitter.com', icon: <TwitterIcon /> },
-    { name: 'GitHub', url: 'https://github.com', icon: <GitHubIcon /> },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/prabhusriramulu/', icon: <LinkedInIcon /> },
+    { name: 'Twitter', url: 'https://twitter.com/prabhusriramulu', icon: <TwitterIcon /> },
   ];
 
   return (
@@ -32,7 +31,7 @@ const ContactSection = () => {
                 Phone
               </Typography>
               <Typography variant="h6" fontWeight={600}>
-                (555) 123-4567
+                (510) 427-9570
               </Typography>
             </Box>
           </Box>
@@ -47,7 +46,7 @@ const ContactSection = () => {
                 Email
               </Typography>
               <Link
-                href="mailto:prabhu@example.com"
+                href="mailto:prabhoooo@gmail.com"
                 underline="hover"
                 color="text.primary"
                 sx={{
@@ -57,7 +56,7 @@ const ContactSection = () => {
                   '&:hover': { color: 'primary.main' },
                 }}
               >
-                prabhu@example.com
+                prabhoooo@gmail.com
               </Link>
             </Box>
           </Box>

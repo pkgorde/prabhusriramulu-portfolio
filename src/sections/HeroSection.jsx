@@ -40,7 +40,7 @@ const HeroSection = () => {
                 </Typography>
 
                 <Typography variant="body1" color="text.secondary">
-                  Currently based in <Box component="span" fontWeight={700}>San Francisco, CA</Box>,
+                  Currently based in <Box component="span" fontWeight={700}>San Francisco Bay Area</Box>,
                   I spend my time building products that help teams work better together,
                   experimenting with new technologies, and finding ways to make complex things simple.
                 </Typography>
